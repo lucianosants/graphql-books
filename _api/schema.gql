@@ -12,6 +12,20 @@ type Book {
   title: String!
 }
 
+input CreateBookInput {
+  author: String!
+  cover: String!
+  genre: String!
+  id: ID!
+  publication_year: String!
+  title: String!
+}
+
+type Mutation {
+  addBook(data: CreateBookInput!): Book!
+  deleteBook(id: String!): Book!
+}
+
 type Query {
   books: [Book!]!
 }
