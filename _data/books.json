@@ -1,0 +1,26 @@
+ [
+    {
+        "id": "nu1nub81bb17",
+        "title": "O Senhor dos Anéis",
+        "author": "J.R.R. Tolkien",
+        "publication_year": "1954",
+        "genre": "Fantasia",
+        "cover": "https://m.media-amazon.com/images/P/B0B3C98K98.01._SCLZZZZZZZ_SX500_.jpg"
+    },
+    {
+        "id": "jq8h7qhg7g17",
+        "title": "1984",
+        "author": "George Orwell",
+        "publication_year": "1949",
+        "genre": "Distopia",
+        "cover": "https://m.media-amazon.com/images/I/51VXYaKO-sL._SX346_BO1,204,203,200_.jpg"
+    },
+    {
+        "id": "iqu9fhq7g",
+        "title": "Dom Quixote",
+        "author": "Miguel de Cervantes",
+        "publication_year": "1605",
+        "genre": "Ficção",
+        "cover": "https://m.media-amazon.com/images/P/B09124L53R.01._SCLZZZZZZZ_SX500_.jpg"
+    }
+]
