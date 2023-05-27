@@ -49,15 +49,13 @@ export class BooksResolver {
 
     @Mutation(() => Book)
     async deleteBook(@Arg('id', () => String) id: string) {
-        const bookIndex = books.findIndex((book) => book.id === id);
+        const bookIndex = this.initialData.findIndex((book) => book.id === id);
 
         if (bookIndex === -1) {
             throw new Error(`${this.messages.noFoundId}: ${id}`);
         }
 
-        const currentBook = this.initialData[bookIndex];
-
-        this.initialData.splice(bookIndex, 1);
+        const currentBook = this.initialData.splice(bookIndex, 1)[0];
 
         return currentBook;
     }
