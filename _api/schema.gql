@@ -29,6 +29,7 @@ type Mutation {
 
 type Query {
   books: [Book!]!
+  getABookById(id: String!): Book!
 }
 
 input UpdateBookInput {

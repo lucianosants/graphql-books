@@ -15,6 +15,7 @@ export class BooksResolver {
         noFoundId: 'Unable to find book with id',
         alreadyBookTitle: 'A book with the same title already exists',
         alreadyBookId: 'A book with ID already exists',
+        noFoundBook: 'Could not find this book',
     };
 
     @Query(() => [Book])
@@ -22,6 +23,17 @@ export class BooksResolver {
         const books = this.initialData.sort().reverse();
 
         return books || [];
+    }
+
+    @Query(() => Book)
+    async getABookById(@Arg('id', () => String) id: string) {
+        const book = this.initialData.find((book) => book.id === id);
+
+        if (!book) {
+            throw new Error(this.messages.noFoundBook);
+        }
+
+        return book;
     }
 
     @Mutation(() => Book)
