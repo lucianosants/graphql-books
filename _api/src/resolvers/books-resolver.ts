@@ -5,10 +5,13 @@ import { Book } from '../models/book-model';
 import books from '@/_data/books.json';
 
 import { CreateBookInput } from '../inputs/create-book-input';
+import { UpdateBookInput } from '../inputs/update-book-input';
 
 @Resolver(() => Book)
 export class BooksResolver {
     private initialData: Book[] = books;
+
+    private readonly messages = { noFoundId: 'Unable to find book with id' };
 
     @Query(() => [Book])
     async books() {
@@ -31,7 +34,7 @@ export class BooksResolver {
         const bookIndex = books.findIndex((book) => book.id === id);
 
         if (bookIndex === -1) {
-            throw new Error(`Can't find book with id: ${id}`);
+            throw new Error(`${this.messages.noFoundId}: ${id}`);
         }
 
         const currentBook = this.initialData[bookIndex];
@@ -39,5 +42,26 @@ export class BooksResolver {
         this.initialData.splice(bookIndex, 1);
 
         return currentBook;
+    }
+
+    @Mutation(() => Book)
+    async updateBook(
+        @Arg('id', () => String) id: string,
+        @Arg('data', () => UpdateBookInput) { ...data }: UpdateBookInput,
+    ) {
+        const bookIndex = this.initialData.findIndex((book) => book.id === id);
+
+        if (bookIndex === -1) {
+            throw new Error(`${this.messages.noFoundId}: ${id}`);
+        }
+
+        const updatedBook = {
+            ...this.initialData[bookIndex],
+            ...data,
+        };
+
+        this.initialData[bookIndex] = updatedBook;
+
+        return updatedBook;
     }
 }

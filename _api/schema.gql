@@ -24,8 +24,17 @@ input CreateBookInput {
 type Mutation {
   addBook(data: CreateBookInput!): Book!
   deleteBook(id: String!): Book!
+  updateBook(data: UpdateBookInput!, id: String!): Book!
 }
 
 type Query {
   books: [Book!]!
+}
+
+input UpdateBookInput {
+  author: String
+  cover: String
+  genre: String
+  publication_year: String
+  title: String
 }
