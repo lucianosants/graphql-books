@@ -67,19 +67,19 @@ export class BooksResolver {
         @Arg('id', () => String) id: string,
         @Arg('data', () => UpdateBookInput) { ...data }: UpdateBookInput,
     ) {
-        const bookIndex = this.initialData.findIndex((book) => book.id === id);
+        const book = this.initialData.find((book) => book.id === id);
 
-        if (bookIndex === -1) {
+        if (!book) {
             throw new Error(`${this.messages.noFoundId}: ${id}`);
         }
 
-        const updatedBook = {
-            ...this.initialData[bookIndex],
+        const currentBook = {
+            ...book,
             ...data,
         };
 
-        this.initialData[bookIndex] = updatedBook;
+        Object.assign(book, currentBook);
 
-        return updatedBook;
+        return currentBook;
     }
 }
