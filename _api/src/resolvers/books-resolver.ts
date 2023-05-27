@@ -19,7 +19,9 @@ export class BooksResolver {
 
     @Query(() => [Book])
     async books() {
-        return this.initialData;
+        const books = this.initialData.sort().reverse();
+
+        return books || [];
     }
 
     @Mutation(() => Book)
