@@ -11,7 +11,11 @@ import { UpdateBookInput } from '../inputs/update-book-input';
 export class BooksResolver {
     private initialData: Book[] = books;
 
-    private readonly messages = { noFoundId: 'Unable to find book with id' };
+    private readonly messages = {
+        noFoundId: 'Unable to find book with id',
+        alreadyBookTitle: 'A book with the same title already exists',
+        alreadyBookId: 'A book with ID already exists',
+    };
 
     @Query(() => [Book])
     async books() {
@@ -20,6 +24,20 @@ export class BooksResolver {
 
     @Mutation(() => Book)
     async addBook(@Arg('data', () => CreateBookInput) { ...data }: CreateBookInput) {
+        const { id, title } = data;
+
+        const existingBookTitle = this.initialData.find((book) => book.title === title);
+
+        const existingBookId = this.initialData.find((book) => book.id === id);
+
+        if (existingBookTitle) {
+            throw new Error(`${this.messages.alreadyBookTitle}`);
+        }
+
+        if (existingBookId) {
+            throw new Error(`${this.messages.alreadyBookId}`);
+        }
+
         const currentBook = {
             ...data,
         };
