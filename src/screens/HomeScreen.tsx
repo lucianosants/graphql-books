@@ -1,6 +1,11 @@
+import { BookDataType } from '../@types/book-types';
 import BookCard from '../components/BookCard';
 
-export default function HomeScreen() {
+type Props = {
+    books: BookDataType[];
+};
+
+export default function HomeScreen({ books }: Props) {
     return (
         <main className="flex h-screen flex-col items-center justify-start space-y-6 overflow-x-hidden bg-zinc-800 p-5">
             <header className="flex w-full items-center justify-center rounded-xl bg-zinc-700 py-3">
@@ -10,13 +15,17 @@ export default function HomeScreen() {
             </header>
 
             <section className="flex w-full gap-4 overflow-auto py-5">
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
-                <BookCard />
+                {books?.map((book) => (
+                    <BookCard
+                        key={book.id}
+                        id={book.id}
+                        cover={book.cover}
+                        title={book.title}
+                        author={book.author}
+                        genre={book.genre}
+                        publication_year={book.publication_year}
+                    />
+                ))}
             </section>
         </main>
     );
