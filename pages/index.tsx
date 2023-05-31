@@ -13,6 +13,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         query: gql`
             query Books {
                 books {
+                    id
                     cover
                     title
                     author

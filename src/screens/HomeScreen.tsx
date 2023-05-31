@@ -15,9 +15,9 @@ export default function HomeScreen({ books }: Props) {
             </header>
 
             <section className="flex w-full gap-4 overflow-auto py-5">
-                {books?.map((book) => (
+                {books?.map((book, index) => (
                     <BookCard
-                        key={book.id}
+                        key={`${index} - ${book.id}`}
                         id={book.id}
                         cover={book.cover}
                         title={book.title}
